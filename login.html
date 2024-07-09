@@ -14,6 +14,8 @@
         margin: 0;
         border: 0;
         cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
     }
 
     body,
@@ -22,7 +24,7 @@
     }
 
     button {
-        padding: 5px;
+        padding: 10px;
         margin-top: 5px;
     }
 
@@ -52,11 +54,20 @@
 
     #okk {
         width: 77%;
-        padding: 3px;
+        padding: 10px;
         border-radius: 3px;
         margin-top: 10px;
         background-color: rgb(91, 151, 83);
         color: aliceblue;
+    }
+    .okk {
+        width: 77%;
+        padding: 10px;
+        border-radius: 3px;
+        margin-top: 10px;
+        background-color: rgb(51, 51, 51);
+        color: aliceblue;
+        text-align: center;
     }
 
     table {
@@ -79,7 +90,7 @@
     <br>
     <center>
         <p>&#128274;</p><br>
-        <input type="text" name="senha" placeholder="senha" id="senha"><br>
+        <input type="password" class="okk" name="senha" placeholder="senha" id="senha"><br>
         <button id="okk">Acessar</button>
     </center>
     <br>
@@ -90,6 +101,7 @@
 
     if (!localStorage.getItem('acessoKeyGuard')) {
         document.getElementById('okk').textContent = 'Cadastrar Acesso'
+        document.getElementById('senha').type = 'text'
     }
 
 

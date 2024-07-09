@@ -45,11 +45,13 @@
         margin: 0;
         border: 0;
         cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
     }
 
     body,
     html {
-        background-color: rgb(68, 68, 68);
+        background-color: #333;
     }
 
     button {
@@ -66,9 +68,21 @@
         margin-left: 10px;
         margin-right: 10px;
         margin-bottom: 2px;
-        background-color: rgb(134, 132, 129);
+        background-color: #333;
         padding: 3px;
         color: aliceblue;
+        border-radius: 10px;
+    }
+
+    details {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 2px;
+        background-color: #333;
+        padding: 3px;
+        color: aliceblue;
+        border-radius: 10px;
+        border: 1px solid #666;
     }
 
     #site,
@@ -99,9 +113,18 @@
     th {
         text-align: center;
     }
-    p{
+
+    p {
         font-size: 500%;
-        text-shadow: 0px 0px 30px  lime;
+        text-shadow: 0px 0px 30px lime;
+    }
+
+    input {
+        border-radius: 10px;
+        padding: 5px;
+        background-color: rgb(77, 74, 74);
+        color: rgb(248, 248, 248);
+        text-align: center;
     }
 </style>
 
@@ -124,20 +147,52 @@
     console.log(localStorage)
 
     document.getElementById('okk').addEventListener('click', () => {
-        let b = false;
-        for (let i = 0; i < 100; i++) {
-            if (!localStorage.getItem(i.toString())) {
-                localStorage.setItem(i.toString(), document.getElementById('site').value + '|' + document.getElementById('email').value + '|' + document.getElementById('senha').value)
-                b = true;
-                console.log('salvo em ' + i)
-                window.location.reload()
-                break;
+
+        if (document.getElementById('site').value !== '') {
+            if (document.getElementById('email').value !== '') {
+                if (document.getElementById('senha').value !== '') {
+
+                    let b = false;
+                    for (let i = 0; i < 100; i++) {
+                        if (!localStorage.getItem(i.toString())) {
+                            localStorage.setItem(i.toString(), cripto(document.getElementById('site').value) + '|' + cripto(document.getElementById('email').value) + '|' + cripto(document.getElementById('senha').value))
+                            b = true;
+                            console.log('salvo em ' + i)
+                            window.location.reload()
+                            break;
+                        }
+                        else {
+                            console.log('n salvo ' + i)
+                        }
+                        //
+                    }
+                }
+                else {
+                    document.getElementById('senha').style.backgroundColor = 'rgb(200 100 100)'
+                    setTimeout(() => {
+                        document.getElementById('senha').style.backgroundColor = 'rgb(77 74 74)'
+                    }, 3000);
+                }
             }
             else {
-                console.log('n salvo ' + i)
+                //document.getElementById('email')
+                document.getElementById('email').style.backgroundColor = 'rgb(200 100 100)'
+                setTimeout(() => {
+                    document.getElementById('email').style.backgroundColor = 'rgb(77 74 74)'
+                }, 3000);
             }
-            //
         }
+        else {
+            //document.getElementById('site')
+            document.getElementById('site').style.backgroundColor = 'rgb(200 100 100)'
+            setTimeout(() => {
+                document.getElementById('site').style.backgroundColor = 'rgb(77 74 74)'
+            }, 3000);
+        }
+
+
+
+
     });
 
     //localStorage.clear()
@@ -161,9 +216,9 @@
     while (rdp !== 100) {
         if (localStorage.getItem(rdp.toString())) {
             var splicee = localStorage.getItem(rdp.toString()).split('|');
-            nomes[rdp2] = splicee[0]
-            email[rdp2] = splicee[1]
-            senha[rdp2] = splicee[2]
+            nomes[rdp2] = cripto(splicee[0])
+            email[rdp2] = cripto(splicee[1])
+            senha[rdp2] = cripto(splicee[2])
             rdp2++
         }
         rdp++
@@ -177,7 +232,7 @@
         if (localStorage.getItem(rdp.toString())) {
             document.getElementById('gggggggggggg').innerHTML += `
         <details>
-            <summary>${nomes[rdp2]}</summary>
+            <summary><b>${nomes[rdp2]}</b></summary>
 
             <table>
                 <tr>
@@ -189,7 +244,7 @@
                     <th><input type="text" value="${senha[rdp2]}"></th>
                 </tr>
                 <tr>
-                    <th colspan="2"><button style="color: aliceblue;background-color: rgb(200, 100, 100);" onclick="del('${rdp}')" id="${rdp2}">Apagar</button></th>
+                    <th colspan="2"><button style="color: aliceblue;background-color: rgb(200, 100, 100); padding:5px; width:100%;" onclick="del('${rdp}')" id="${rdp2}">Apagar</button></th>
                 </tr>
             </table>
            
@@ -208,6 +263,26 @@
         window.location.reload();
 
     }
+
+
+    function key() {
+        return crypto.subtle.generateKey({
+            name: 'AES-GCM',
+            length: 256
+        },
+            true,
+            ['encript', 'decrypt'])
+    }
+
+    function cripto(m) {
+        return m.replace(/[A-Za-z]/g, (c) => {
+            return String.fromCharCode(c.charCodeAt(0) +
+                (c.toLowerCase() < 'n' ? 13 : -13))
+        })
+    }
+
+
+
 </script>
 
 </html>
