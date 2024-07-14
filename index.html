@@ -1,213 +1,212 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt_br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>BresoDEV Doc</title>
+
+  <meta name="description" content="BresoDEV Doc" />
+  <meta name="keywords" content="bresodev" />
+  <link href="all.css" rel="stylesheet" type="text/css" />
+  
 </head>
-<script>
-    //login
-    var url = window.location.href;
-    var name = 'senha';
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), res = regex.exec(url);
-    if (res) {
-        if (res[2] !== null) {
 
-            if (localStorage.getItem('acessoKeyGuard')) {
-                if (decodeURIComponent(res[2].replace(/\+/g, ' ')) == localStorage.getItem('acessoKeyGuard')) {
-                    //td ok
-                }
-                else {
-                    window.location.href = 'login.html'
-                }
-            }
-            else {
-                window.location.href = 'login.html'
-            }
-
-        }
-        else {
-            window.location.href = 'login.html'
-        }
-    }
-    else {
-        window.location.href = 'login.html'
-    }
-
-
-</script>
 <style>
-    * {
-        padding: 0;
-        margin: 0;
-        border: 0;
-        cursor: pointer;
-    }
+  .codigo {
 
-    body,
-    html {
-        background-color: rgb(68, 68, 68);
-    }
+    background-color: rgb(70, 70, 70);
+    color: aliceblue;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(0, 0, 0);
+  }
 
-    button {
-        padding: 5px;
-        margin-top: 5px;
-    }
+  .vm {
+    color: rgb(200, 100, 100);
+  }
+
+  .vd {
+    color: rgb(100, 200, 100);
+  }
+
+  .az {
+    color: rgb(84, 84, 125);
+  }
+
+  .lrj {
+    color: rgb(223, 145, 34);
+  }
+
+  .am {
+    color: rgb(242, 255, 0);
+  }
+
+  .comentario {
+    color: rgb(24, 143, 93);
+  }
+
+  .cy {
+    color: rgb(7, 225, 221);
+  }
+
+  .ling {
+    color: rgb(255, 255, 255);
+    background-color: black;
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+
+  }
+
+  tr,
+  td {
+    border: 1px solid #666;
+    background-color: rgb(210, 210, 210);
+    padding: 5px;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+    width: 100%;
+    text-decoration: none;
+    padding: 5px;
+
+    background-color: #008cba;
+    color: white;
+    border: none;
+    font-weight: normal !important;
+    margin: 1px !important;
+    border-radius: 5px;
+  }
+
+  /*--------------------------------*/
+  .bg-vd {
+    background-color: rgb(20, 132, 63);
+  }
+
+  .bg-vm {
+    background-color: rgb(228, 77, 77);
+  }
+
+  /*--------------------------------*/
+  .hover-bg-vd:hover {
+    background-color: rgb(20, 132, 63);
+  }
+
+  .hover-bg-vm:hover {
+    background-color: rgb(228, 77, 77);
+  }
+
+  .hover-bg-az:hover {
+    background-color: #008cba;
+  }
 
 
+  .hover-bg-br:hover {
+    background-color: aliceblue;
+  }
 
-    details,
-    ul,
-    li,
-    summary {
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-bottom: 2px;
-        background-color: rgb(134, 132, 129);
-        padding: 3px;
-        color: aliceblue;
-    }
+  .hover-bg-pt:hover {
+    background-color: rgb(0, 0, 0);
+  }
 
-    #site,
-    #email,
-    #senha,
-    #okk {
-        width: 75%;
-        padding: 3px;
-        border-radius: 3px;
-        margin-top: 5px;
-    }
+  /*--------------------------------*/
+  .hover-f-vd:hover {
+    color: rgb(20, 132, 63);
+  }
 
-    #okk {
-        width: 77%;
-        padding: 3px;
-        border-radius: 3px;
-        margin-top: 10px;
-        background-color: rgb(91, 151, 83);
-        color: aliceblue;
-    }
+  .hover-f-vm:hover {
+    color: rgb(228, 77, 77);
+  }
 
-    table {
-        margin-left: 20%;
-        margin-right: 20%;
-        width: 60%;
-    }
+  .hover-f-az:hover {
+    color: #008cba;
+  }
 
-    th {
-        text-align: center;
-    }
-    p{
-        font-size: 500%;
-        text-shadow: 0px 0px 30px  lime;
-    }
+  .hover-f-br:hover {
+    color: aliceblue;
+  }
+
+  .hover-f-pt:hover {
+    color: rgb(0, 0, 0);
+  }
 </style>
 
 <body>
-    <center>
-        <p>&#128275;</p><br>
-        <input type="text" name="site" placeholder="site" id="site"><br>
-        <input type="text" name="email" placeholder="email" id="email"><br>
-        <input type="text" name="senha" placeholder="senha" id="senha"><br>
-        <button id="okk">Salvar</button>
-    </center>
-    <br>
-    <br>
-    <div id="gggggggggggg"></div>
+  <header class="contain-to-grid">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="index.html">&#128275; KeyGuard</a></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <!-- Left Nav Section -->
+        <ul class="left">
+          <li class="item active" selected><a target="_blank" href="link1.html">Link 1</a></li>
+          <li class="item "><a target="_blank" href="link2.html">Link 2</a></li>
+          <li class="item "><a target="_blank" href="link3.html">Link 3</a></li>
+        </ul>
+      </section>
+    </nav>
+  </header>
+  <div class="wrapper">
+    <div class="row">
+      <div class="large-12 columns">
+        <br>
+        <h2>Boas Vindas!</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <p>
+         Olá, seja bem vindo(a) ao <b>KeyGuard</b>
+        </p>
+        <p>
+          Esse é o aplicativo ideal para quem sempre esqueçe qual login e senhas de qualquer site ou serviço, ou até mesmo para quem deseja ter a sua própria lista de senhas na palma da mão!
+        </p>
+        <p>
+          Lembrando que as senhas ficam salvas somente no dispositivo atual, e que nenhum outro dispositivo terá acesso as suas informações, nem mesmo o criador do programa, pois tudo fica armazenado e criptografado em seu smartphone
+        </p>
+<p>Sendo assim, caso mude de celular, anote em um papel todas senhas antes, pois em outro celular, mesmo que use seu login, não irá recuperar as senhas, pois como foi dito, tudo fica armazenado e criptografado em seu smartphone atual</p>
+        <button id="Acessar">Concordar e acessar o aplicativo</button>
+      </div>
+    </div>
+
+
+  </div>
+  <footer class="footer row">
+    <div class="columns">
+      <div class="footer_lists-container row collapse">
+        <div class="footer_social columns large-2">
+          <p class="footer_copyright">Copyright (c) 2024, BresoDEV</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
 </body>
 <script>
 
-    //localStorage.clear()
+  if (localStorage.getItem('acesso_KeyGuard')) {
+    window.location.href = 'login.html'
+  }
 
-    console.log(localStorage)
+  document.getElementById('Acessar').addEventListener('click', () => {
+    localStorage.setItem('acesso_KeyGuard', '1')
+    window.location.href = 'login.html'
+  })
+  
 
-    document.getElementById('okk').addEventListener('click', () => {
-        let b = false;
-        for (let i = 0; i < 100; i++) {
-            if (!localStorage.getItem(i.toString())) {
-                localStorage.setItem(i.toString(), document.getElementById('site').value + '|' + document.getElementById('email').value + '|' + document.getElementById('senha').value)
-                b = true;
-                console.log('salvo em ' + i)
-                window.location.reload()
-                break;
-            }
-            else {
-                console.log('n salvo ' + i)
-            }
-            //
-        }
-    });
-
-    //localStorage.clear()
-    //var l = [];
-
-    // for (let i = 0; i < 100; i++) {
-    //     localStorage.setItem('site_' + i, 'valor_site_' + i)
-    //     localStorage.setItem('email_' + i, 'valor_email_' + i)
-    //     localStorage.setItem('senha_' + i, 'valor_senha_' + i)
-    //
-    // }
-
-
-    var nomes = []
-    var email = []
-    var senha = []
-
-
-    var rdp = 0;
-    var rdp2 = 0;
-    while (rdp !== 100) {
-        if (localStorage.getItem(rdp.toString())) {
-            var splicee = localStorage.getItem(rdp.toString()).split('|');
-            nomes[rdp2] = splicee[0]
-            email[rdp2] = splicee[1]
-            senha[rdp2] = splicee[2]
-            rdp2++
-        }
-        rdp++
-    }
-
-
-
-    var rdp = 0;
-    var rdp2 = 0;
-    while (rdp !== 100) {
-        if (localStorage.getItem(rdp.toString())) {
-            document.getElementById('gggggggggggg').innerHTML += `
-        <details>
-            <summary>${nomes[rdp2]}</summary>
-
-            <table>
-                <tr>
-                    <th>Email:</th>
-                    <th><input type="text" value="${email[rdp2]}"></th>
-                </tr>
-                <tr>
-                    <th>Senha:</th>
-                    <th><input type="text" value="${senha[rdp2]}"></th>
-                </tr>
-                <tr>
-                    <th colspan="2"><button style="color: aliceblue;background-color: rgb(200, 100, 100);" onclick="del('${rdp}')" id="${rdp2}">Apagar</button></th>
-                </tr>
-            </table>
-           
-        </details>
-        `;
-            rdp2++
-        }
-        rdp++
-    }
-
-
-
-    function del(id) {
-
-        localStorage.removeItem(id)
-        window.location.reload();
-
-    }
 </script>
-
+<script src="cavalo.js"></script>
 </html>
