@@ -1,0 +1,173 @@
+<script>
+     if (!localStorage.getItem('acesso_KeyGuard')) {
+    window.location.href = 'index.html'
+  }
+</script>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+
+    body,
+    html {
+        background-color: rgb(23, 23, 23);
+    }
+
+    button {
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    input {
+        padding: 15px;
+        border-radius: 10px;
+        font-size: larger;
+    }
+
+    details,
+    ul,
+    li,
+    summary {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 2px;
+        background-color: rgb(134, 132, 129);
+        padding: 3px;
+        color: aliceblue;
+    }
+
+    #site,
+    #email,
+    #senha,
+    #nome,
+    #okk {
+        width: 75%;
+        padding: 3px;
+        border-radius: 3px;
+        margin-top: 5px;
+    }
+
+    #okk {
+        width: 77%;
+        padding: 10px;
+        border-radius: 3px;
+        margin-top: 10px;
+        background-color: rgb(91, 151, 83);
+        color: aliceblue;
+
+    }
+
+    .okk {
+        width: 77%;
+        padding: 10px;
+        border-radius: 3px;
+        margin-top: 10px;
+        background-color: rgb(51, 51, 51);
+        color: aliceblue;
+        text-align: center;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: larger;
+    }
+
+    table {
+        margin-left: 20%;
+        margin-right: 20%;
+        width: 60%;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    p {
+        font-size: 500%;
+        text-shadow: 0px 0px 30px red;
+    }
+
+    h4 {
+        color: aliceblue;
+    }
+</style>
+
+<body>
+    <br>
+    <br>
+    <center>
+        <p>&#128274;</p><br>
+        <h4 id="h4"></h4>
+        <input type="text" class="okk" name="nome" placeholder="Nome" id="nome"><br>
+        <input type="text" class="okk" name="senha" placeholder="Senha" id="senha"><br>
+        <button id="okk">Acessar</button>
+    </center>
+    <br>
+    <br>
+
+</body>
+<script>
+
+    if (!localStorage.getItem('acessoKeyGuard_Senha')) {
+        document.getElementById('h4').innerHTML = '<br>Cadastre seu nome e uma senha de acesso <br>para o aplicativo:<br><br>'
+        document.getElementById('okk').textContent = 'Cadastrar Acesso'
+        document.getElementById('senha').type = 'text'
+    }
+    else {
+        document.getElementById('h4').innerHTML = '<br>Olá novamente <b>' + localStorage.getItem('acessoKeyGuard_Nome') + '</b>!<br>Use sua senha para acessar o aplicativo:<br><br>'
+        document.getElementById('nome').value = localStorage.getItem('acessoKeyGuard_Nome')
+        document.getElementById('okk').textContent = 'Acessar'
+        document.getElementById('senha').type = 'password'
+        document.getElementById('senha').select()
+    }
+
+
+    document.getElementById('okk').addEventListener('click', () => {
+        if (localStorage.getItem('acessoKeyGuard_Senha')) {
+            if (document.getElementById('senha').value == localStorage.getItem('acessoKeyGuard_Senha')) {
+
+                if (document.getElementById('nome').value == localStorage.getItem('acessoKeyGuard_Nome')) {
+
+                    document.getElementById('h4').innerHTML = '<br><br><font style="color:lime">Aguarde...</font><br><br>'
+                    setTimeout(() => {
+                        window.location.href = 'inicio.html?senha=' + document.getElementById('senha').value
+                    }, 2000);
+                }
+                else {
+                    document.getElementById('h4').innerHTML = '<br><br><font style="color:red">Usuário Incorreto!</font><br><br>'
+                }
+            }
+            else {
+                document.getElementById('h4').innerHTML = '<br><br><font style="color:red">Senha Incorreta!</font><br><br>'
+            }
+        }
+        else {
+            localStorage.setItem('acessoKeyGuard_Senha', document.getElementById('senha').value)
+            localStorage.setItem('acessoKeyGuard_Nome', document.getElementById('nome').value)
+
+            document.getElementById('h4').innerHTML = '<br><br><font style="color:lime">Aguarde...</font><br><br>'
+            setTimeout(() => {
+                window.location.href = 'inicio.html?senha=' + document.getElementById('senha').value
+            }, 2000);
+        }
+    });
+
+     
+
+</script>
+
+</html>
