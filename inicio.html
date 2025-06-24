@@ -1,7 +1,7 @@
 <script>
     if (!localStorage.getItem('acesso_KeyGuard')) {
-   window.location.href = 'index.html'
- }
+        window.location.href = 'index.html'
+    }
 </script>
 
 <!DOCTYPE html>
@@ -101,7 +101,9 @@
         margin-top: 5px;
     }
 
-    #okk {
+    #okk,
+    #Executar,
+    #Voltar {
         width: 77%;
         padding: 3px;
         border-radius: 3px;
@@ -132,24 +134,81 @@
         color: rgb(248, 248, 248);
         text-align: center;
     }
+
+    textarea {
+        border-radius: 10px;
+        padding: 5px;
+        background-color: rgb(77, 74, 74);
+        color: rgb(248, 248, 248);
+        text-align: center;
+        width: 60%;
+        resize: none;
+    }
+    span{
+        color: aliceblue;
+    }
 </style>
 
 <body>
     <center>
-        <p>&#128275;</p><br>
+        <p id="cadeado">&#128275;</p><br>
         <input type="text" name="site" placeholder="site" id="site"><br>
         <input type="text" name="email" placeholder="email" id="email"><br>
         <input type="text" name="senha" placeholder="senha" id="senha"><br>
         <button id="okk">Salvar</button>
+        <br>
+        <br>
+        <span>Clique no cadeado para exportar</span>
     </center>
     <br>
     <br>
     <div id="gggggggggggg"></div>
 </body>
 <script>
-   
 
-    //localStorage.clear()
+
+
+    //exportar localStorage
+    document.getElementById('cadeado').addEventListener('click', () => {
+
+        document.getElementById('cadeado').id ='cadeado2'//muda o id, senao buga ao selecionar o texto
+        var s = ''
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+            if (key.includes('keyguard_')) {
+                s += `localStorage.setItem('${key}','${value}');`
+            }
+            //console.log(`${key}: ${value}`);
+        }
+
+        document.body.innerHTML = `
+        <center>
+        <br>
+        <textarea id="textarea">${s}</textarea>
+        <br>
+        <button id="Executar">Executar codigo e importar senhas</button>
+        <button id="Voltar">Voltar</button>
+        <hr>
+        </center>
+        `
+
+        document.getElementById('Executar').addEventListener('click', () => {
+            try {
+                eval(document.getElementById('textarea').value)
+                alert('Senhas importadas com sucesso')
+            } catch (error) {
+                alert('Erro ao importar a lista de senhas')
+            }
+            window.location.reload()
+        })
+        document.getElementById('Voltar').addEventListener('click', () => {
+             window.location.reload()
+        })
+    })
+
+
+    //-----------------------
 
     console.log(localStorage)
 
@@ -161,8 +220,8 @@
 
                     let b = false;
                     for (let i = 0; i < 100; i++) {
-                        if (!localStorage.getItem('keyguard_'+i.toString())) {
-                            localStorage.setItem('keyguard_'+i.toString(), cripto(document.getElementById('site').value) + '|' + cripto(document.getElementById('email').value) + '|' + cripto(document.getElementById('senha').value))
+                        if (!localStorage.getItem('keyguard_' + i.toString())) {
+                            localStorage.setItem('keyguard_' + i.toString(), cripto(document.getElementById('site').value) + '|' + cripto(document.getElementById('email').value) + '|' + cripto(document.getElementById('senha').value))
                             b = true;
                             console.log('salvo em ' + i)
                             window.location.reload()
@@ -221,8 +280,8 @@
     var rdp = 0;
     var rdp2 = 0;
     while (rdp !== 100) {
-        if (localStorage.getItem('keyguard_'+rdp.toString())) {
-            var splicee = localStorage.getItem('keyguard_'+rdp.toString()).split('|');
+        if (localStorage.getItem('keyguard_' + rdp.toString())) {
+            var splicee = localStorage.getItem('keyguard_' + rdp.toString()).split('|');
             nomes[rdp2] = cripto(splicee[0])
             email[rdp2] = cripto(splicee[1])
             senha[rdp2] = cripto(splicee[2])
@@ -236,7 +295,7 @@
     var rdp = 0;
     var rdp2 = 0;
     while (rdp !== 100) {
-        if (localStorage.getItem('keyguard_'+rdp.toString())) {
+        if (localStorage.getItem('keyguard_' + rdp.toString())) {
             document.getElementById('gggggggggggg').innerHTML += `
         <details>
             <summary><b>${nomes[rdp2]}</b></summary>
