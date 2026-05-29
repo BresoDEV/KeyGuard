@@ -1,3 +1,8 @@
+<script>
+ if (localStorage.getItem('acesso_KeyGuard')) {
+    window.location.href = 'login.html'
+  }
+</script>
 <!doctype html>
 <html lang="pt_br">
 
@@ -197,9 +202,7 @@
 </body>
 <script>
 
-  if (localStorage.getItem('acesso_KeyGuard')) {
-    window.location.href = 'login.html'
-  }
+ 
 
   document.getElementById('Acessar').addEventListener('click', () => {
     localStorage.setItem('acesso_KeyGuard', '1')
